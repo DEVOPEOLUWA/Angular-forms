@@ -1,0 +1,135 @@
+<body>
+<fui-toast
+  class="fuitoast"
+  *ngIf="isShowDivIf"
+  [showProgress]="'bottom'"
+  [displayTime]="5000"
+  [class]="'success'"
+>
+  <ng-template style="background:green" fuiToastTitle>Congratulations</ng-template>
+  <ng-template fuiToastMessage
+    >You Are qualified to move to the next page!</ng-template
+  >
+</fui-toast>
+<fui-toast
+class="fuitoast"
+*ngIf="notShowDivIf"
+[showProgress]="'bottom'"
+[displayTime]="5000"
+[class]="'error'"
+>
+<ng-template style="background:green" fuiToastTitle>Error!</ng-template>
+<ng-template fuiToastMessage
+  >You Are Not qualified to move to the next page!</ng-template
+>
+</fui-toast>
+<div class="cointainer">
+<h2 class="ui center aligned icon header">
+  <i class="circular users icon"></i>
+  Software engineer Biodata Form
+</h2>
+<form class="ui form">
+  <div class="field">
+    <label>First Name</label>
+    <input
+      type="text"
+      [(ngModel)]="firstName"
+      name="first-name"
+      placeholder="First Name"
+    />
+  </div>
+  <div class="field">
+    <label>Last Name</label>
+    <input
+      type="text"
+      name="last-name"
+      [(ngModel)]="lastName"
+      placeholder="Last Name"
+    />
+  </div>
+  <div class="field">
+    <label>Phone number</label>
+    <input
+      [(ngModel)]="phoneNumber"
+      type="number"
+      name="phone-number"
+      placeholder="Enter your phone number"
+      min="8"
+      max="8"
+      step="0.1"
+    />
+  </div>
+  <div class="field">
+    <label>Email Address</label>
+    <input
+      type="email"
+      name="email"
+      placeholder="Enter your email"
+      [(ngModel)]="email"
+    />
+  </div>
+  <div class="field">
+    <label>Enter your Country</label>
+    <!-- You need to name the selects differently, eg: firstSelect or stateSelect  -->
+    <fui-select
+      style="background:#fde6c7"
+      class="selection"
+      [(ngModel)]="selectedState"
+      placeholder="Select Country"
+      [options]="states"
+      labelField="name"
+      [isSearchable]="searchable"
+      [isDisabled]="disabled"
+      #firstSelect
+    >
+      <!-- And then refer to it -->
+      <fui-select-option
+        style="background:#fde6c7"
+        *ngFor="let state of firstSelect.filteredOptions"
+        [value]="state"
+      >
+      </fui-select-option>
+    </fui-select>
+  </div>
+  <div class="field">
+    <label for="">Select your occupation</label>
+    <div class="ui labeled input">
+      <div class="ui label" style="background:#fde6c7">I am a</div>
+      <select style="background:#fde6c7" [(ngModel)]="occupation">
+        <option></option>
+        <option>Frontend Developer</option>
+        <option>Backend Developer</option>
+        <option>Designer</option>
+        <option>DevOps-Engineer</option>
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <label style="margin-bottom:1rem">Successful</label>
+    <fui-radio-button name="example" value="True" [(ngModel)]="eRadio"
+      >True</fui-radio-button
+    >
+
+    <fui-radio-button
+      style="margin-left:2rem"
+      name="example"
+      value="false"
+      [(ngModel)]="eRadio"
+      >False</fui-radio-button
+    >
+  </div>
+  <button
+    class="fluid ui button"
+    (click)="displayToasterIf()"
+    type="submit"
+    [disabled]="
+      !(!!firstName && !!lastName && !!phoneNumber && !!email && !!eRadio)
+    "
+    (click)="getValues($event, firstName, lastName, phoneNumber, email)"
+  >
+    Submit
+  </button>
+</form>
+</div>
+<body></body>
+</body>
